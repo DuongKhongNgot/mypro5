@@ -1,108 +1,174 @@
+:root {
+    /* Chế độ tối (Mặc định) */
+    --bg-color: #0b0e14;
+    --bg-gradient: linear-gradient(135deg, #0b0e14 0%, #1a1c2c 100%);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent-color: #8b5cf6; /* Màu tím huyền ảo */
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --nav-bg: rgba(11, 14, 20, 0.8);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode {
+    /* Chế độ sáng */
+    --bg-color: #f8fafc;
+    --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --accent-color: #3b82f6;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --nav-bg: rgba(248, 250, 252, 0.8);
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', -apple-system, sans-serif;
+    margin: 0; padding: 0;
+    font-family: 'Inter', sans-serif;
 }
+
+html { scroll-behavior: smooth; }
 
 body {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite; /* Hiệu ứng nền chuyển màu */
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    transition: all 0.4s ease;
+    line-height: 1.6;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
 }
 
-/* 1. Hiệu ứng nền chuyển động */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* NAVBAR */
+.navbar {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
 }
 
-.profile-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px); /* Làm mờ nền phía sau card */
-    width: 100%;
-    max-width: 380px;
-    padding: 40px 25px;
-    border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    
-    /* Hiệu ứng hiện hình khi load trang */
-    animation: slideUp 0.8s ease-out forwards;
+.nav-content {
+    max-width: 1000px; margin: 0 auto; padding: 1rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
 }
 
-/* 2. Hiệu ứng Card hiện lên */
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
+.logo {
+    font-size: 1.5rem; font-weight: 800; text-decoration: none;
+    color: var(--accent-color);
+}
+
+.nav-links { list-style: none; display: flex; align-items: center; gap: 1.5rem; }
+.nav-links a {
+    text-decoration: none; color: var(--text-secondary);
+    font-weight: 600; font-size: 0.95rem; transition: 0.3s;
+}
+.nav-links a:hover { color: var(--accent-color); }
+
+.theme-btn {
+    background: none; border: none; color: var(--accent-color);
+    font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+}
+
+/* CONTAINER & CARD */
+.container { max-width: 850px; margin: 120px auto 40px; padding: 0 20px; }
+
+.card {
+    background: var(--card-bg);
+    padding: 2rem; border-radius: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease;
+}
+
+.card:hover { transform: translateY(-5px); }
+
+/* HERO SECTION */
+.hero-section { display: flex; align-items: center; gap: 3rem; margin-bottom: 4rem; }
+.hero-text { flex: 1; }
+.greeting { color: var(--accent-color); font-weight: 600; font-size: 1.1rem; }
+.name { font-size: 3.5rem; font-weight: 800; margin: 0.5rem 0; letter-spacing: -1px; }
+.role { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 2rem; }
+
+.hero-btns { display: flex; gap: 1rem; }
+.btn-primary {
+    background: var(--accent-color); color: white;
+    padding: 0.8rem 1.8rem; border-radius: 0.8rem; text-decoration: none;
+    font-weight: 600; transition: 0.3s; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+.btn-secondary {
+    border: 1px solid var(--border-color); color: var(--text-primary);
+    padding: 0.8rem 1.8rem; border-radius: 0.8rem; text-decoration: none;
+    font-weight: 600; transition: 0.3s;
 }
 
 .avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid white;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    
-    /* Hiệu ứng nhún nhảy nhẹ */
-    animation: float 3s ease-in-out infinite;
+    width: 240px; height: 240px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    object-fit: cover; border: 4px solid var(--accent-color);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+    animation: morphing 8s infinite ease-in-out;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+@keyframes morphing {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
 }
 
-.name { font-size: 22px; color: #333; margin-bottom: 8px; }
-.bio { font-size: 14px; color: #666; margin-bottom: 30px; }
+/* SECTIONS & HOBBIES */
+.section { margin-bottom: 3.5rem; }
+.section-title { font-size: 1.6rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
 
-.links-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.hobbies-grid { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.hobby-tag {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.7rem 1.3rem; border-radius: 12px;
+    font-size: 0.9rem; border: 1px solid var(--border-color);
+    transition: 0.3s;
+}
+.hobby-tag:hover { background: var(--accent-color); color: white; }
+
+/* SOCIAL BUTTONS */
+.links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.social-btn {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.8rem; padding: 1.1rem; border-radius: 1rem;
+    text-decoration: none; color: var(--text-primary);
+    font-weight: 600; border: 1px solid var(--border-color);
+    transition: 0.3s; background: rgba(255, 255, 255, 0.03);
 }
 
-.link-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px;
-    background: white;
-    color: #333;
-    text-decoration: none;
-    border-radius: 12px;
-    font-weight: 600;
-    border: 1px solid #eee;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    
-    /* Mặc định ẩn để chạy animation load từng nút */
-    opacity: 0;
-    animation: slideUp 0.5s ease-out forwards;
-}
+.social-btn i { font-size: 1.2rem; }
 
-/* 3. Hiệu ứng load từng nút một (Staggered) */
-.delay-1 { animation-delay: 0.3s; }
-.delay-2 { animation-delay: 0.5s; }
-.delay-3 { animation-delay: 0.7s; }
-.delay-4 { animation-delay: 0.9s; }
+/* Hover colors cho từng nút mxh */
+.facebook i { color: #1877F2; }
+.tiktok i { color: #ffffff; }
+.instagram i { color: #E4405F; }
+.discord i { color: #5865F2; }
 
-.link-btn:hover {
-    transform: scale(1.05); /* Phóng to nhẹ khi di chuột */
-    color: white;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-/* Màu khi hover cho từng nút */
+.social-btn:hover { transform: translateY(-3px); color: white !important; }
 .facebook:hover { background: #1877F2; }
 .tiktok:hover { background: #000; }
-.instagram:hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); }
+.instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .discord:hover { background: #5865F2; }
+
+.footer { text-align: center; padding: 3rem 0; color: var(--text-secondary); font-size: 0.9rem; }
+
+/* ANIMATION KHI LOAD */
+.fade-in { opacity: 0; animation: fadeInUp 0.8s ease forwards; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .hero-section { flex-direction: column-reverse; text-align: center; }
+    .name { font-size: 2.8rem; }
+    .links-grid { grid-template-columns: 1fr; }
+    .nav-links a { display: none; }
+}
